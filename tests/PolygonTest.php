@@ -11,13 +11,13 @@ class PolygonTest extends PHPUnit_Framework_TestCase
 		$poly->addVertex($pointA);
 		$poly->addVertex($pointB);
 
-		$verticies = $poly->getVerticies();
+		$verticies = $poly->getVertices();
 
 		$this->assertEquals(2, count($verticies));
 
 		$poly->addMultipleVerticies(array($pointA, $pointB, $pointC));
 
-		$verticies = $poly->getVerticies();
+		$verticies = $poly->getVertices();
 
 		$this->assertEquals(5, count($verticies));
 	}

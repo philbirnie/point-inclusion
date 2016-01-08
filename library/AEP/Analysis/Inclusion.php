@@ -34,8 +34,8 @@ class Inclusion
 		$this->point = $point;
 		$this->includeBoundaries = $includeBoundaries;
 
-		if(count($this->polygon->getVerticies()) < 3) {
-			throw new \Exception("Insufficient number of verticies on polygon");
+		if(count($this->polygon->getVertices()) < 3) {
+			throw new \Exception("Insufficient number of vertices on polygon");
 		}
 	}
 
@@ -49,7 +49,7 @@ class Inclusion
 	{
 
 		/** @var array $verticies */
-		$verticies = $this->polygon->getVerticies();
+		$verticies = $this->polygon->getVertices();
 
 		/** @var bool $isWithinPoly */
 		$isWithinPoly = false;
@@ -97,7 +97,7 @@ class Inclusion
 	 */
 	public function containsPointOnVertex()
 	{
-		foreach ($this->polygon->getVerticies() as $vertex) {
+		foreach ($this->polygon->getVertices() as $vertex) {
 			if ($this->point == $vertex) {
 				return true;
 			}
