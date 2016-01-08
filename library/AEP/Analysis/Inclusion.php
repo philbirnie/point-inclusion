@@ -33,6 +33,10 @@ class Inclusion
 		$this->polygon = $polygon;
 		$this->point = $point;
 		$this->includeBoundaries = $includeBoundaries;
+
+		if(count($this->polygon->getVerticies()) < 3) {
+			throw new \Exception("Insufficient number of verticies on polygon");
+		}
 	}
 
 	/**

@@ -15,7 +15,8 @@ class InclusionTest extends PHPUnit_Framework_TestCase
 {
 	private $polygon;
 
-	private function initialize() {
+	private function initialize()
+	{
 		$this->polygon = new Polygon();
 
 		$ll = new Point(-83, 39);
@@ -69,5 +70,16 @@ class InclusionTest extends PHPUnit_Framework_TestCase
 		$inclusion = new Inclusion($this->polygon, $point);
 
 		$this->assertTrue($inclusion->isWithinPolygon());
+	}
+
+	/**
+	 * @expectedException Exception
+	 */
+	public function testInsufficientPoly() {
+		$point = new Point(50, 50);
+		$polygon = new Polygon();
+		$polygon->addVertex($point);
+
+		new Inclusion($polygon, $point);
 	}
 }
