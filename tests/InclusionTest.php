@@ -9,6 +9,7 @@
 */
 use \AEP\Point;
 use \AEP\Polygon;
+use \AEP\Analysis\Inclusion;
 
 class InclusionTest extends PHPUnit_Framework_TestCase
 {
@@ -30,9 +31,9 @@ class InclusionTest extends PHPUnit_Framework_TestCase
 	{
 		$this->initialize();
 
-		$point = new \AEP\Point(-82.5, 39.5);
+		$point = new Point(-82.5, 39.5);
 
-		$inclusion = new \AEP\Analysis\Inclusion($this->polygon, $point);
+		$inclusion = new Inclusion($this->polygon, $point);
 
 		$this->assertTrue($inclusion->isWithinPolygon());
 	}
@@ -41,9 +42,9 @@ class InclusionTest extends PHPUnit_Framework_TestCase
 	{
 		$this->initialize();
 
-		$point = new \AEP\Point(-82.5, 40.5);
+		$point = new Point(-82.5, 40.5);
 
-		$inclusion = new \AEP\Analysis\Inclusion($this->polygon, $point);
+		$inclusion = new Inclusion($this->polygon, $point);
 
 		$this->assertFalse($inclusion->isWithinPolygon());
 	}
@@ -52,9 +53,9 @@ class InclusionTest extends PHPUnit_Framework_TestCase
 	{
 		$this->initialize();
 
-		$point = new \AEP\Point(-82, 39.5);
+		$point = new Point(-82, 39.5);
 
-		$inclusion = new \AEP\Analysis\Inclusion($this->polygon, $point);
+		$inclusion = new Inclusion($this->polygon, $point);
 
 		$this->assertTrue($inclusion->isWithinPolygon());
 	}
@@ -63,9 +64,9 @@ class InclusionTest extends PHPUnit_Framework_TestCase
 	{
 		$this->initialize();
 
-		$point = new \AEP\Point(-82, 39);
+		$point = new Point(-82, 39);
 
-		$inclusion = new \AEP\Analysis\Inclusion($this->polygon, $point);
+		$inclusion = new Inclusion($this->polygon, $point);
 
 		$this->assertTrue($inclusion->isWithinPolygon());
 	}
