@@ -39,6 +39,7 @@ class Inclusion
 		}
 	}
 
+
 	/**
 	 * Determine if point is within Polygon.
 	 *
