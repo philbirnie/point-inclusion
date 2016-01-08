@@ -3,8 +3,9 @@
 class PolygonTest extends PHPUnit_Framework_TestCase
 {
 	public function testAddGoodPoint() {
-		$pointA = array('x' => 15, 'y' => 20);
-		$pointB = array('x' => 25, 'y' => 30);
+		$pointA = new \AEP\Point(50, 40);
+		$pointB = new \AEP\Point(40, 30);
+		$pointC = new \AEP\Point(30, 20);
 
 		$poly = new \AEP\Polygon();
 		$poly->addVertex($pointA);
@@ -13,5 +14,11 @@ class PolygonTest extends PHPUnit_Framework_TestCase
 		$verticies = $poly->getVerticies();
 
 		$this->assertEquals(2, count($verticies));
+
+		$poly->addMultipleVerticies(array($pointA, $pointB, $pointC));
+
+		$verticies = $poly->getVerticies();
+
+		$this->assertEquals(5, count($verticies));
 	}
 }

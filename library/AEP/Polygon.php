@@ -10,17 +10,25 @@
 
 namespace AEP;
 
-class Polygon {
+class Polygon
+{
 
 	private $verticies = array();
 
 	/**
-	 * @param $vertex array
+	 * @param $vertex Point
 	 */
-	public function addVertex($vertex) {
-		if(isset($vertex['x']) && isset($vertex['y'])) {
-			$p = new Point($vertex['x'], $vertex['y']);
-			array_push($this->verticies, $p);
+	public function addVertex($vertex)
+	{
+		array_push($this->verticies, $vertex);
+	}
+
+	/**
+	 * @param array $verticies
+	 */
+	public function addMultipleVerticies($verticies) {
+		foreach($verticies as $vertex) {
+			array_push($this->verticies, $vertex);
 		}
 	}
 
@@ -29,7 +37,8 @@ class Polygon {
 	 *
 	 * @return array
 	 */
-	public function getVerticies() {
+	public function getVerticies()
+	{
 		return $this->verticies;
 	}
 }
