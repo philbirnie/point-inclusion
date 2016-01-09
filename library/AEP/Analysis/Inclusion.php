@@ -47,9 +47,11 @@ class Inclusion
 	 */
 	public function isWithinPolygon()
 	{
+		/** @var int $intersections */
+		$intersections = 0;
 
-		/** @var array $verticies */
-		$verticies = $this->polygon->getVertices();
+		/** @var array $vertices */
+		$vertices = $this->polygon->getVertices();
 
 		/** @var bool $isWithinPoly */
 		$isWithinPoly = false;
@@ -62,12 +64,13 @@ class Inclusion
 			return false;
 		}
 
-		for ($i = 1; $i < count($verticies); $i++) {
+
+		for ($i = 1; $i < count($vertices); $i++) {
 			/** @var Point $vertex1 */
-			$vertex1 = $verticies[$i - 1];
+			$vertex1 = $vertices[$i - 1];
 
 			/** @var Point $vertex2 */
-			$vertex2 = $verticies[$i];
+			$vertex2 = $vertices[$i];
 
 			//Checks for point on a horizontal boundary
 			if ((($vertex1->y == $vertex2->y) && ($this->point->y == $vertex1->y))
@@ -76,18 +79,24 @@ class Inclusion
 			) {
 				return true;
 			}
-
-			//Otherwise, check for inclusion.
-			if ((
-				(($vertex1->y <= $this->point->y) && ($this->point->y < $vertex2->y))
-				|| (($vertex2->y <= $this->point->y) && ($this->point->y < $vertex1->y))
-				&& ($this->point->x < ($vertex2->x - $vertex1->x) * ($this->point->y - $vertex1->y) / ($vertex2->y - $vertex1->y) + $vertex1->x)
-			)
-			) {
-				$isWithinPoly = !$isWithinPoly;
+			if ($this->point->y > min($vertex1->y, $vertex2->y)
+				&& $this->point->y <= max($vertex1->y, $vertex2->y)
+				&& $this->point->x <= max($vertex1->x, $vertex2->x)
+				&& $vertex1->y != $vertex2->y) {
+				$xinters =
+					($this->point->y - $vertex1->y) * ($vertex2->x - $vertex1->x)
+					/ ($vertex2->y - $vertex1->y)
+					+ $vertex1->x;
+				if ($xinters == $this->point->x) {
+					// Check if point is on the polygon boundary (other than horizontal)
+					return $this->includeBoundaries ? TRUE : FALSE;
+				}
+				if ($vertex1->x == $vertex2->x || $this->point->x <= $xinters) {
+					$intersections++;
+				}
 			}
 		}
-		return $isWithinPoly;
+		return $intersections % 2 != 0;
 	}
 
 	/**
