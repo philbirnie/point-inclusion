@@ -15,7 +15,7 @@ class PolygonTest extends PHPUnit_Framework_TestCase
 
 		$this->assertEquals(2, count($verticies));
 
-		$poly->addMultipleVerticies(array($pointA, $pointB, $pointC));
+		$poly->addMultipleVertices(array($pointA, $pointB, $pointC));
 
 		$verticies = $poly->getVertices();
 

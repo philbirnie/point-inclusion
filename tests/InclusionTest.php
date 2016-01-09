@@ -22,10 +22,11 @@ class InclusionTest extends PHPUnit_Framework_TestCase
 		$ll = new Point(-83, 39);
 		$lr = new Point(-82, 39);
 		$ur = new Point(-82, 40);
+		$cr = new Point(-82.5, 40.5);
 		$ul = new Point(-83, 40);
 		$cl = new Point(-83, 39);
 
-		$this->polygon->addMultipleVerticies(array($ll, $lr, $ur, $ul, $cl));
+		$this->polygon->addMultipleVertices(array($ll, $lr, $ur, $cr, $ul, $cl));
 	}
 
 	public function testSimpleInclusion()
@@ -43,7 +44,7 @@ class InclusionTest extends PHPUnit_Framework_TestCase
 	{
 		$this->initialize();
 
-		$point = new Point(-82.5, 40.5);
+		$point = new Point(-82.5, 40.6);
 
 		$inclusion = new Inclusion($this->polygon, $point);
 
